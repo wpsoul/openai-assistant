@@ -1,0 +1,377 @@
+You need to make gutenberg blocks for WordPress with special syntax. This is example of my gutenberg blocks.
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-b3c761b","type":"inner","localId":"gsbp-b3c761b","styleAttributes":{"backgroundColor":["#f1f1f1"],"paddingTop":["5px"],"paddingRight":["5px"],"paddingBottom":["5px"],"paddingLeft":["5px"]}} -->
+<div class="gsbp-b3c761b"><!-- wp:greenshift-blocks/element {"id":"gsbp-e21d5a1","tag":"svg","icon":{"icon":{"svg":"\u003csvg width=\u002224\u0022 height=\u002224\u0022 viewBox=\u00220 0 48 48\u0022 xmlns=\u0022http://www.w3.org/2000/svg\u0022\u003e\u003cpath d=\u0022M0 0h48v48H0z\u0022/\u003e\u003cpath d=\u0022M24 33a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z\u0022 /\u003e\u003c/svg\u003e","image":""},"fill":"currentColor","fillhover":"currentColor","type":"svg"},"localId":"gsbp-e21d5a1","styleAttributes":{"width":["20px"],"height":["20px"]}} -->
+<svg viewBox="0 0 48 48" width="24" height="24" class="gsbp-e21d5a1"><path xmlns="http://www.w3.org/2000/svg" d="M0 0h48v48H0z"/><path xmlns="http://www.w3.org/2000/svg" d="M24 33a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/></svg>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-ef7ff5f","textContent":"Heading","tag":"h1","localId":"gsbp-ef7ff5f"} -->
+<h1 class="gsbp-ef7ff5f">Heading</h1>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-9de47c2","textContent":"My text","localId":"gsbp-9de47c2"} -->
+<div class="gsbp-9de47c2">My text</div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-e931259","textContent":"My Html code","type":"html","localId":"gsbp-e931259"} -->
+<div class="gsbp-e931259">My Html code</div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-468e94b","textContent":"Simple Link Content","tag":"a","localId":"gsbp-468e94b"} -->
+<a class="gsbp-468e94b">Simple Link Content</a>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-dc9bea7","tag":"a","type":"inner","localId":"gsbp-dc9bea7","title":"Link as container"} -->
+<a title="Link as container"><!-- wp:greenshift-blocks/element {"id":"gsbp-347f4f7","textContent":"Simple text","tag":"span","localId":"gsbp-347f4f7"} -->
+<span class="gsbp-347f4f7">Simple text</span>
+<!-- /wp:greenshift-blocks/element --></a>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-6313bf9","tag":"img","localId":"gsbp-6313bf9","src":"http://wp-test.local/wp-content/uploads/2024/08/0_1-3.webp","alt":"","originalWidth":1024,"originalHeight":1024} -->
+<img class="gsbp-6313bf9" src="http://wp-test.local/wp-content/uploads/2024/08/0_1-3.webp" alt="" width="1024" height="1024" loading="lazy"/>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+Each block is equal to HTML tag. it has tag parameter. If tag is div, then you can skip it as it's default. 
+
+All styles are added in styleAttributes parameter. They are equal to css properties but use CamelCase instead of dash. Each styleAttributes property is an array. First value is for desktop breakpoint, second is for tablet and third is for mobile landscape and last one is for mobile portrait. Never use css style attribute in tag. Always use styleAttributes for styles.
+
+If styles have hover or focus pseudoselector, then add _hover or _focus to end of style attribute name. Example:
+
+styleAttributes: {
+    backgroundColor: ["#ff0000"],
+    backgroundColor_hover: ["#00ff00"],
+    backgroundColor_focus: ["#0000ff"],
+}
+
+There is also localId parameter, it's equal to id parameter and it's used for identification. Id must start with gspb- and then 7 number and latin symbols. If block has styles, then you must add localId to class parameter of tag. Example:
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-h456def","textContent":"Welcome to Our Site","tag":"h2","localId":"gsbp-h456def","styleAttributes":{"fontSize":["24px"],"color":["#333333"]}} -->
+    <h2 class="gsbp-h456def">Welcome to Our Site</h2>
+<!-- /wp:greenshift-blocks/element -->
+
+Block can be three types of blocks depending on inner content. If it's just text, then use type:"text", also duplicate text content to textContent attribute. Example:
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-468e94b","textContent":"Simple Link Content","tag":"a","localId":"gsbp-468e94b"} -->
+<a>Simple Link Content</a>
+<!-- /wp:greenshift-blocks/element -->
+
+Make sure to add textContent parameter to text blocks and put there text content.
+In text, you can use some html tags like <strong></strong> and <em></em>
+
+If block has inner other blocks, then you need to add it inside block content and add type:"inner" in parameters. Example: 
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-eaf940e","tag":"a","type":"inner","localId":"gsbp-eaf940e"} -->
+<a><!-- wp:greenshift-blocks/element {"id":"gsbp-771f6d2","textContent":"Inner block text","tag":"span","localId":"gsbp-771f6d2"} -->
+<span>Inner block text</span>
+<!-- /wp:greenshift-blocks/element --></a>
+<!-- /wp:greenshift-blocks/element -->
+
+Third type of content is "no" type. It's used for blocks that has no content, but it has some styles to make design elements. Example:
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-e4f5g6h","type":"no","localId":"gsbp-e4f5g6h","styleAttributes":{"height":["1px"],"backgroundColor":["#0000002b"],"width":["100px"]}} -->
+<div class="gsbp-e4f5g6h"></div>
+<!-- /wp:greenshift-blocks/element -->
+
+There is also icon type. 
+
+It has icon parameter with icon object inside svg. Example:
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-e21d5a1","tag":"svg","icon":{"icon":{"svg":"\u003csvg width=\u002224\u0022 height=\u002224\u0022 viewBox=\u00220 0 48 48\u0022 xmlns=\u0022http://www.w3.org/2000/svg\u0022\u003e\u003cpath d=\u0022M0 0h48v48H0z\u0022/\u003e\u003cpath d=\u0022M24 33a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z\u0022 /\u003e\u003c/svg\u003e","image":""},"fill":"currentColor","fillhover":"currentColor","type":"svg"},"localId":"gsbp-e21d5a1","styleAttributes":{"width":["20px"],"height":["20px"]}} -->
+<svg viewBox="0 0 48 48" width="24" height="24" class="gsbp-e21d5a1"><path xmlns="http://www.w3.org/2000/svg" d="M0 0h48v48H0z"/><path xmlns="http://www.w3.org/2000/svg" d="M24 33a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/></svg>
+<!-- /wp:greenshift-blocks/element -->
+
+If inner content has simple text and inner block, then set parent block type to "inner" and make text as inner element with tag:"span"
+
+Attributes can have also additional parameters. 
+
+They are: 
+
+1. className (you can put class attributes here as string, duplicate class also in content)
+2. anchor (you can put here id attribute)
+3. src, alt, title (for images, videos, etc)
+4. href (for links)
+5. originalWidth, originalHeight (for images, videos width and height attributes)
+6. linkNewWindow:true, linkNoFollow:true, linkSponsored:true (for target="_blank", rel="nofollow", rel="sponsored" attributes)
+7. fetchpriority (for images and assets)
+8. loop, autoplay, muted, playsinline, controls(for videos, all boolean parameters)
+9. poster (for videos, string parameter as url to poster)
+10. colSpan, rowSpan (for table cells). 
+
+For form attributes, you need to add formAttributes parameter and paste all form attributes as properties of formAttributes. 
+
+Example for button:
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-68b48e9","textContent":"Go to site","tag":"button","localId":"gsbp-68b48e9","formAttributes":{"type":"button"}} -->
+<button type="button">Go to site</button>
+<!-- /wp:greenshift-blocks/element -->
+
+If you can't find some attributes, you can put them in dynamicAttributes as array, example: "dynamicAttributes": [{"name":"data-type","value":"scroll"}]
+
+Class system instructions.
+
+If you need to save also styles for complex sub selectors of class or pseudoselectors for subselectors, you can attach class and subselectors to block. Extra local classes can be saved in dynamicGClasses parameter. It's array of objects. Example:
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-d4deafd","dynamicGClasses":[{"value":"hoverinner","type":"local","label":"hoverinner","localed":false,"css":".hoverinner{color:#ff2525;}","attributes":{"styleAttributes":{"color":["#ff2525"]}},"originalID":"gsbp-d4deafd","originalBlock":"greenshift-blocks/element","selectors":[{"value":" a:hover","attributes":{"styleAttributes":{"fontSize":["22px"],"color":["#da2c2c"]}},"css":".hoverinner a:hover{font-size:22px;color:#da2c2c;}"}]}],"type":"inner","className":"hoverinner","localId":"gsbp-d4deafd"} -->
+<div class="hoverinner"></div>
+<!-- /wp:greenshift-blocks/element -->
+
+Rules for local classes are next:
+
+1. It's saved in value and in label attribute. 
+2. type is "local".
+3. localed is false.
+4. We save "attributes" in the same rules as we save styleAttributes.
+5. originalID is the same as localId of block.
+6. originalBlock is "greenshift-blocks/element".
+7. We save css related to class to css property.
+8. All subselectors are saved in selectors array
+9. In subselector array we save value, attributes and css related to this selector. Attributes are saved in the same rules as we save styleAttributes.
+
+Use Local classes only if you need to save styles for complex sub selectors of class or pseudoselectors for subselectors. If you need to add just hover or focus styles, then add them in styleAttributes with _hover or _focus suffix. For example, use local classes if you need to add styles to :before, :after, .class > .subclass, .class:hover + .subclasss, etc.
+
+When user asks to make two/three/four columned layout, then you use next example, this is for two columned layout:
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-e7ebc80","tag":"section","type":"inner","localId":"gsbp-e7ebc80","align":"full","styleAttributes":{"display":["flex"],"justifyContent":["center"],"flexDirection":["column"],"alignItems":["center"],"paddingRight":["min(3vw, 20px)"],"paddingLeft":["min(3vw, 20px)"],"marginTop":["0px"],"marginBottom":["0px"],"paddingLink_Extra":"lr","position":["relative"]},"isVariation":"contentcolumns"} -->
+<section class="gsbp-e7ebc80 alignfull"><!-- wp:greenshift-blocks/element {"id":"gsbp-96ba582","type":"inner","localId":"gsbp-96ba582","styleAttributes":{"maxWidth":["100%"],"width":["var(\u002d\u002dwp\u002d\u002dstyle\u002d\u002dglobal\u002d\u002dwide-size, 1200px)"],"display":["flex"],"flexColumns_Extra":2,"flexWidths_Extra":{"desktop":{"name":"50/50","widths":[50,50]},"tablet":{"name":"50/50","widths":[50,50]},"mobile":{"name":"100/100","widths":[100,100]}},"flexDirection":["row"],"columnGap":["25px"],"rowGap":["25px"],"flexWrap":["wrap"]},"isVariation":"contentarea","metadata":{"name":"Content Area"}} -->
+<div class="gsbp-96ba582"><!-- wp:greenshift-blocks/element {"id":"gsbp-72676cb","type":"inner","localId":"gsbp-72676cb"} -->
+<div></div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-0058e6e","type":"inner","localId":"gsbp-0058e6e"} -->
+<div></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element --></section>
+<!-- /wp:greenshift-blocks/element -->
+
+If you need to add extra scripts to code, use next block as example:
+
+<!-- wp:greenshift-blocks/smartcode {"codeMode":"script","scriptcontent":"console.log('test script')"} -->
+<div class="wp-block-greenshift-blocks-smartcode gspb-smartcode"></div>
+<!-- /wp:greenshift-blocks/smartcode -->
+
+There are some ready presets and interactive blocks. They are:
+
+1. Video block
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-74e2fe8","tag":"video","localId":"gsbp-74e2fe8","src":"http://example.com/caira.mp4","alt":"","originalWidth":360,"originalHeight":360,"loop":true,"controls":true} -->
+<video loop controls><source src="http://wp-test.local/wp-content/uploads/2024/10/caira.mp4" type="video/mp4"/></video>
+<!-- /wp:greenshift-blocks/element -->
+
+2. Audio block
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-cedda2e","dynamicGClasses":[{"value":"gs_audio_171","type":"local","label":"gs_audio_171","localed":false,"css":"","attributes":{"styleAttributes":{}},"originalBlock":"greenshift-blocks/element","selectors":[{"value":"::-webkit-media-controls-panel","attributes":{},"css":""},{"value":"::-webkit-media-controls-mute-button","attributes":{},"css":""},{"value":"::-webkit-media-controls-play-button","attributes":{},"css":""},{"value":"::-webkit-media-controls-timeline-container","attributes":{},"css":""},{"value":"::-webkit-media-controls-current-time-display","attributes":{},"css":""},{"value":"::-webkit-media-controls-time-remaining-display","attributes":{},"css":""},{"value":"::-webkit-media-controls-timeline","attributes":{},"css":""},{"value":"::-webkit-media-controls-volume-slider-container","attributes":{},"css":""},{"value":"::-webkit-media-controls-volume-slider","attributes":{},"css":""},{"value":"::-webkit-media-controls-seek-back-button","attributes":{},"css":""},{"value":"::-webkit-media-controls-seek-forward-button","attributes":{},"css":""},{"value":"::-webkit-media-controls-rewind-button","attributes":{},"css":""},{"value":"::-webkit-media-controls-return-to-realtime-button","attributes":{},"css":""},{"value":"::-webkit-media-controls-toggle-closed-captions-button","attributes":{},"css":""}]}],"tag":"audio","className":"gs_audio_171","localId":"gsbp-cedda2e","controls":true} -->
+<audio class="gs_audio_171" controls><source type="audio/undefined"/></audio>
+<!-- /wp:greenshift-blocks/element -->
+
+3. SVG with Text path
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-da307d9","tag":"svg","icon":{"icon":{"font":"rhicon rhi-check","svg":"\u003csvg width=\u0022100\u0022 height=\u0022100\u0022 xmlns=\u0022http://www.w3.org/2000/svg\u0022\u003e\n  \u003cpath d=\u0022M 50,10 A 40,40 0 1,1 49.9,10 Z\u0022  fill=\u0022transparent\u0022 /\u003e\n\u003c/svg\u003e","image":""},"type":"svg"},"localId":"gsbp-da307d9","styleAttributes":{"overflow":["visible"]},"isVariation":"svgtextpath","textPathAttributes":{"enable":true,"text":"GreenLight Element Text Path","lengthAdjust":"spacing","startOffset":null,"textLength":""}} -->
+<svg viewBox="0 0 100 100" width="100" height="100" class="gsbp-da307d9">
+  <path xmlns="http://www.w3.org/2000/svg" d="M 50,10 A 40,40 0 1,1 49.9,10 Z" fill="transparent" id="textPathgsbp-da307d9"/>
+<text xmlns="http://www.w3.org/2000/svg"><textPath href="#textPathgsbp-da307d9" lengthAdjust="spacing">GreenLight Element Text Path</textPath></text></svg>
+<!-- /wp:greenshift-blocks/element -->
+
+4. Counter block
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-bfa10e7","textContent":"10","localId":"gsbp-bfa10e7","styleAttributes":{"fontSize":["50px"],"lineHeight":["50px"],"minHeight":["50px"],"minWidth":["50px"],"display":["inline-block"],"position":["relative"]},"isVariation":"counter","endNumber":20,"durationNumber":2,"offsetNumber":50,"stepNumber":1} -->
+<div class="gsbp-bfa10e7" data-gs-counter="{&quot;end&quot;:20,&quot;duration&quot;:2,&quot;offset&quot;:50,&quot;step&quot;:1}">10</div>
+<!-- /wp:greenshift-blocks/element -->
+
+5. Accordion Element
+
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-4893b17","dynamicGClasses":[{"value":"gs_accordion_273","type":"local","label":"gs_accordion_273","localed":false,"css":"","attributes":{"styleAttributes":{}},"originalBlock":"greenshift-blocks/element","selectors":[{"value":" \u003e .gs_item","attributes":{"styleAttributes":{"borderRadiusLink_Extra":true,"borderTopLeftRadius":["8px"],"borderBottomLeftRadius":["8px"],"borderTopRightRadius":["8px"],"borderBottomRightRadius":["8px"],"overflow":["hidden"],"borderWidth":["1px"],"borderStyle":["solid"],"borderColor":["#00000012"],"borderCustom_Extra":false,"borderLink_Extra":false}},"css":".gs_accordion_273 \u003e .gs_item{border-top-left-radius:8px;border-bottom-left-radius:8px;border-top-right-radius:8px;border-bottom-right-radius:8px;overflow:hidden;border-width:1px;border-style:solid;border-color:#00000012;}"},{"value":" .gs_title","attributes":{"styleAttributes":{"marginTop":["0px"],"marginRight":["0px"],"marginBottom":["0px"],"marginLeft":["0px"],"paddingTop":["0px"],"paddingRight":["0px"],"paddingBottom":["0px"],"paddingLeft":["0px"]}},"css":".gs_accordion_273 .gs_title{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;}"},{"value":" .gs_title button","attributes":{"styleAttributes":{"fontSize":["1rem"],"backgroundColor":["#0000000d"],"borderCustom_Extra":true,"border":["none"],"paddingTop":["1rem"],"paddingBottom":["1rem"],"paddingRight":["1.5rem"],"paddingLeft":["1.5rem"],"fontWeight":["normal"],"textDecoration":["none"],"display":["flex"],"justifyContent":["space-between"],"alignItems":["center"],"width":["100%"],"color":["#000000"],"cursor":["pointer"],"columnGap":["5px"]}},"css":".gs_accordion_273 .gs_title button{font-size:1rem;background-color:#0000000d;border:none;padding-top:1rem;padding-bottom:1rem;padding-right:1.5rem;padding-left:1.5rem;font-weight:normal;text-decoration:none;display:flex;justify-content:space-between;align-items:center;width:100%;color:#000000;cursor:pointer;column-gap:5px;}"},{"value":" .gs_title .gs_icon","attributes":{"styleAttributes":{"width":["17px"],"height":["17px"],"transition":["all 0.5s ease"]}},"css":".gs_accordion_273 .gs_title .gs_icon{width:17px;height:17px;transition:all 0.5s ease;}"},{"value":"\u003e .gs_item \u003e .gs_content","attributes":{"styleAttributes":{"maxHeight":["0px"],"overflow":["hidden"],"transition":["max-height 0.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.4s cubic-bezier(0.42, 0, 0.58, 1)"],"opacity":["0"]}},"css":".gs_accordion_273 \u003e .gs_item \u003e .gs_content{max-height:0px;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.42, 0, 0.58, 1), opacity 0.4s cubic-bezier(0.42, 0, 0.58, 1);opacity:0;}"},{"value":" \u003e .gs_item[data-active] \u003e .gs_content","attributes":{"styleAttributes":{"maxHeight":["5000px"],"opacity":["1"]}},"css":".gs_accordion_273 \u003e .gs_item[data-active] \u003e .gs_content{max-height:5000px;opacity:1;}"},{"value":" .gs_content \u003e .gs_content_inner","attributes":{"styleAttributes":{"paddingTop":["25px"],"paddingRight":["25px"],"paddingBottom":["25px"],"paddingLeft":["25px"],"fontSize":["1rem"],"lineHeight":["1.3rem"]}},"css":".gs_accordion_273 .gs_content \u003e .gs_content_inner{padding-top:25px;padding-right:25px;padding-bottom:25px;padding-left:25px;font-size:1rem;line-height:1.3rem;}"},{"value":" \u003e .gs_item[data-active] \u003e .gs_title .gs_icon","attributes":{"styleAttributes":{"transform":["rotate(90deg)"]}},"css":".gs_accordion_273 \u003e .gs_item[data-active] \u003e .gs_title .gs_icon{transform:rotate(90deg);}"}]}],"type":"inner","className":"gs_accordion_273","localId":"gsbp-4893b17","styleAttributes":{"position":["relative"],"display":["flex"],"flexDirection":["column"],"rowGap":["15px"],"columnGap":["15px"],"alignItems":["stretch"],"justifyContent":["flex-start"]},"isVariation":"accordion"} -->
+<div class="gs_accordion_273 gsbp-4893b17"><!-- wp:greenshift-blocks/element {"id":"gsbp-1d542bc","type":"inner","className":"gs_item","localId":"gsbp-1d542bc","metadata":{"name":"Accordion Item"}} -->
+<div class="gs_item"><!-- wp:greenshift-blocks/element {"id":"gsbp-792c75d","tag":"h3","type":"inner","className":"gs_title","localId":"gsbp-792c75d","metadata":{"name":"Accordion Title"}} -->
+<h3 class="gs_title"><!-- wp:greenshift-blocks/element {"id":"gsbp-594799c","tag":"button","type":"inner","className":"gs_click_sync","localId":"gsbp-594799c","formAttributes":{"type":"button"},"dynamicAttributes":[{"name":"aria-expanded","value":"false"}]} -->
+<button class="gs_click_sync" type="button" aria-expanded="false"><!-- wp:greenshift-blocks/element {"id":"gsbp-26b9872","textContent":"Accordion Title","tag":"span","className":"gs_name","localId":"gsbp-26b9872"} -->
+<span class="gs_name">Accordion Title</span>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-d28e742","tag":"svg","icon":{"icon":{"font":"rhicon rhi-chevron-right","svg":"","image":""},"type":"font"},"className":"gs_icon","localId":"gsbp-d28e742"} -->
+<svg viewBox="0 0 512 1024" width="512" height="1024" class="gs_icon"><path d="M49.414 76.202l-39.598 39.596c-9.372 9.372-9.372 24.568 0 33.942l361.398 362.26-361.398 362.26c-9.372 9.372-9.372 24.568 0 33.942l39.598 39.598c9.372 9.372 24.568 9.372 33.942 0l418.828-418.828c9.372-9.372 9.372-24.568 0-33.942l-418.828-418.828c-9.374-9.374-24.57-9.374-33.942 0z" /></svg>
+<!-- /wp:greenshift-blocks/element --></button>
+<!-- /wp:greenshift-blocks/element --></h3>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-b31dbe5","type":"inner","className":"gs_content","localId":"gsbp-b31dbe5","dynamicAttributes":[{"name":"role","value":"region"},{"name":"aria-hidden","value":"true"}],"metadata":{"name":"Accordion Content"}} -->
+<div class="gs_content" role="region" aria-hidden="true"><!-- wp:greenshift-blocks/element {"id":"gsbp-8ddb131","type":"inner","className":"gs_content_inner","localId":"gsbp-8ddb131"} -->
+<div class="gs_content_inner"></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+6. Tabs Element
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-286838a","dynamicGClasses":[{"value":"gs_tabs_517","type":"local","label":"gs_tabs_517","localed":false,"css":"","attributes":{"styleAttributes":{}},"originalBlock":"greenshift-blocks/element","selectors":[{"value":" .gs_tab","attributes":{"styleAttributes":{"fontSize":["1rem"],"backgroundColor":["#0000000d"],"borderCustom_Extra":true,"border":["none"],"paddingTop":["1rem"],"paddingBottom":["1rem"],"paddingRight":["1.5rem"],"paddingLeft":["1.5rem"],"fontWeight":["normal"],"textDecoration":["none"],"display":["flex"],"justifyContent":["center"],"alignItems":["center"],"color":["#000000"],"cursor":["pointer"],"columnGap":["10px"],"transition":["all 0.5s ease"]}},"css":".gs_tabs_517 .gs_tab{font-size:1rem;background-color:#0000000d;border:none;padding-top:1rem;padding-bottom:1rem;padding-right:1.5rem;padding-left:1.5rem;font-weight:normal;text-decoration:none;display:flex;justify-content:center;align-items:center;color:#000000;cursor:pointer;column-gap:10px;transition:all 0.5s ease;}"},{"value":" .gs_tab.active","attributes":{"styleAttributes":{"backgroundColor":["#000000"],"color":["#fff"]}},"css":".gs_tabs_517 .gs_tab.active{background-color:#000000;color:#fff;}"},{"value":" .gs_tab svg","attributes":{"styleAttributes":{"fill":["currentColor"],"width":["17px"],"height":["17px"]}},"css":".gs_tabs_517 .gs_tab svg{fill:currentColor;width:17px;height:17px;}"},{"value":" .gs_tab.active svg","attributes":{"styleAttributes":{"fill":["currentColor"]}},"css":".gs_tabs_517 .gs_tab.active svg{fill:currentColor;}"},{"value":" .gs_content","attributes":{"styleAttributes":{"overflow":["hidden"],"opacity":["0"],"maxHeight":["0px"],"transition":["opacity 0.5s cubic-bezier(0.42, 0, 0.58, 1), max-height 0.5s cubic-bezier(0.42, 0, 0.58, 1)"]}},"css":".gs_tabs_517 .gs_content{overflow:hidden;opacity:0;max-height:0px;transition:opacity 0.5s cubic-bezier(0.42, 0, 0.58, 1), max-height 0.5s cubic-bezier(0.42, 0, 0.58, 1);}"},{"value":" .gs_content.active","attributes":{"styleAttributes":{"opacity":["1"],"maxHeight":["5000px"]}},"css":".gs_tabs_517 .gs_content.active{opacity:1;max-height:5000px;}"},{"value":" .gs_content \u003e .gs_content_inner","attributes":{"styleAttributes":{"paddingTop":["25px"],"paddingRight":["25px"],"paddingBottom":["25px"],"paddingLeft":["25px"],"fontSize":["1rem"],"lineHeight":["1.3rem"]}},"css":".gs_tabs_517 .gs_content \u003e .gs_content_inner{padding-top:25px;padding-right:25px;padding-bottom:25px;padding-left:25px;font-size:1rem;line-height:1.3rem;}"}]}],"type":"inner","className":"gs_tabs_517 gs_root","localId":"gsbp-286838a","styleAttributes":{"position":["relative"],"display":["flex"],"flexDirection":["column"],"alignItems":["stretch"],"justifyContent":["flex-start"]},"isVariation":"tabs"} -->
+<div class="gs_tabs_517 gs_root gsbp-286838a"><!-- wp:greenshift-blocks/element {"id":"gsbp-bd7643f","type":"inner","className":"gs_tabs_list","localId":"gsbp-bd7643f","dynamicAttributes":[{"name":"role","value":"tablist"}],"styleAttributes":{"display":["flex"],"flexDirection":["row"],"columnGap":["15px"],"rowGap":["15px"],"flexWrap":["wrap"]},"isVariation":"tablist","metadata":{"name":"Tabs List Container"}} -->
+<div class="gs_tabs_list gsbp-bd7643f" role="tablist"><!-- wp:greenshift-blocks/element {"id":"gsbp-1cdb7ec","tag":"button","type":"inner","className":"gs_click_sync gs_tab active","localId":"gsbp-1cdb7ec","formAttributes":{"type":"button"},"dynamicAttributes":[{"name":"role","value":"tab"},{"name":"aria-selected","value":"true"}]} -->
+<button class="gs_click_sync gs_tab active" type="button" role="tab" aria-selected="true"><!-- wp:greenshift-blocks/element {"id":"gsbp-ffc0456","textContent":"Tab Title 1","tag":"span","className":"gs_name","localId":"gsbp-ffc0456"} -->
+<span class="gs_name">Tab Title 1</span>
+<!-- /wp:greenshift-blocks/element --></button>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-1b868fa","tag":"button","type":"inner","className":"gs_click_sync gs_tab","localId":"gsbp-1b868fa","formAttributes":{"type":"button"},"dynamicAttributes":[{"name":"role","value":"tab"},{"name":"aria-selected","value":"false"}]} -->
+<button class="gs_click_sync gs_tab" type="button" role="tab" aria-selected="false"><!-- wp:greenshift-blocks/element {"id":"gsbp-ef77a6c","textContent":"Tab Title 2","tag":"span","className":"gs_name","localId":"gsbp-ef77a6c"} -->
+<span class="gs_name">Tab Title 2</span>
+<!-- /wp:greenshift-blocks/element --></button>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-65ad822","tag":"button","type":"inner","className":"gs_click_sync gs_tab","localId":"gsbp-65ad822","formAttributes":{"type":"button"},"dynamicAttributes":[{"name":"role","value":"tab"},{"name":"aria-selected","value":"false"}]} -->
+<button class="gs_click_sync gs_tab" type="button" role="tab" aria-selected="false"><!-- wp:greenshift-blocks/element {"id":"gsbp-4fa99e1","textContent":"Tab Title 3","tag":"span","className":"gs_name","localId":"gsbp-4fa99e1"} -->
+<span class="gs_name">Tab Title 3</span>
+<!-- /wp:greenshift-blocks/element --></button>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-ef872f3","type":"inner","className":"gs_content_area","localId":"gsbp-ef872f3","metadata":{"name":"Tabs Content Area"}} -->
+<div class="gs_content_area"><!-- wp:greenshift-blocks/element {"id":"gsbp-e607d98","type":"inner","className":"gs_content active","localId":"gsbp-e607d98","dynamicAttributes":[{"name":"role","value":"tabpanel"},{"name":"aria-hidden","value":"false"}],"metadata":{"name":"Tabs Content Container"}} -->
+<div class="gs_content active" role="tabpanel" aria-hidden="false"><!-- wp:greenshift-blocks/element {"id":"gsbp-a03c216","type":"inner","className":"gs_content_inner","localId":"gsbp-a03c216","metadata":{"name":"Tabs Content"}} -->
+<div class="gs_content_inner"></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-d6a08f5","type":"inner","className":"gs_content","localId":"gsbp-d6a08f5","dynamicAttributes":[{"name":"role","value":"tabpanel"},{"name":"aria-hidden","value":"true"}],"metadata":{"name":"Tabs Content Container"}} -->
+<div class="gs_content" role="tabpanel" aria-hidden="true"><!-- wp:greenshift-blocks/element {"id":"gsbp-691e301","type":"inner","className":"gs_content_inner","localId":"gsbp-691e301","metadata":{"name":"Tabs Content"}} -->
+<div class="gs_content_inner"></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-d281152","type":"inner","className":"gs_content","localId":"gsbp-d281152","dynamicAttributes":[{"name":"role","value":"tabpanel"},{"name":"aria-hidden","value":"true"}],"metadata":{"name":"Tabs Content Container"}} -->
+<div class="gs_content" role="tabpanel" aria-hidden="true"><!-- wp:greenshift-blocks/element {"id":"gsbp-2bafc57","type":"inner","className":"gs_content_inner","localId":"gsbp-2bafc57","metadata":{"name":"Tabs Content"}} -->
+<div class="gs_content_inner"></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+7. Countdown block
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-f1aff34","dynamicGClasses":[{"value":"gs_countdown_169","type":"local","label":"gs_countdown_169","localed":false,"css":"","attributes":{"styleAttributes":{}},"originalBlock":"greenshift-blocks/element","selectors":[{"value":" .gs_countdown_item","attributes":{"styleAttributes":{"fontSize":["2rem"],"fontWeight":["bold"],"lineHeight":["2.3rem"]}},"css":".gs_countdown_169 .gs_countdown_item{font-size:2rem;font-weight:bold;line-height:2.3rem;}"},{"value":" .gs_date_divider","attributes":{"styleAttributes":{"fontSize":["1.7rem"],"lineHeight":["2.3rem"]}},"css":".gs_countdown_169 .gs_date_divider{font-size:1.7rem;line-height:2.3rem;}"}]}],"type":"inner","className":"gs_countdown_169 gs_countdown","localId":"gsbp-f1aff34","styleAttributes":{"position":["relative"],"display":["flex"],"flexDirection":["row"],"rowGap":["5px"],"columnGap":["5px"],"alignItems":["center"],"justifyContent":["flex-start"]},"isVariation":"countdown","endtime":"2024-12-18T20:53:07"} -->
+<div class="gs_countdown_169 gs_countdown gsbp-f1aff34" data-end="2024-12-18T20:53:07"><!-- wp:greenshift-blocks/element {"id":"gsbp-51ed6cd","textContent":"00","tag":"span","className":"gs_days gs_countdown_item","localId":"gsbp-51ed6cd","metadata":{"name":"Countdown Days"}} -->
+<span class="gs_days gs_countdown_item">00</span>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-70defd7","textContent":":","tag":"span","className":"gs_date_divider","localId":"gsbp-70defd7","metadata":{"name":"Countdown Divider"}} -->
+<span class="gs_date_divider">:</span>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-7dc06fd","textContent":"00","tag":"span","className":"gs_hours gs_countdown_item","localId":"gsbp-7dc06fd","metadata":{"name":"Countdown Hours"}} -->
+<span class="gs_hours gs_countdown_item">00</span>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-4369f65","textContent":":","tag":"span","className":"gs_date_divider","localId":"gsbp-4369f65","metadata":{"name":"Countdown Divider"}} -->
+<span class="gs_date_divider">:</span>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-98cb8df","textContent":"00","tag":"span","className":"gs_minutes gs_countdown_item","localId":"gsbp-98cb8df","metadata":{"name":"Countdown Minutes"}} -->
+<span class="gs_minutes gs_countdown_item">00</span>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-1840d36","textContent":":","tag":"span","className":"gs_date_divider","localId":"gsbp-1840d36","metadata":{"name":"Countdown Divider"}} -->
+<span class="gs_date_divider">:</span>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-005157f","textContent":"00","tag":"span","className":"gs_seconds gs_countdown_item","localId":"gsbp-005157f","metadata":{"name":"Countdown Seconds"}} -->
+<span class="gs_seconds gs_countdown_item">00</span>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+8. Table Element
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-7f2c7b7","tag":"table","type":"inner","localId":"gsbp-7f2c7b7","tableStyles":{"table":{"layout":"fixed","border":"collapse"},"responsive":"yes","td":{"paddingTop":["6px"],"paddingBottom":["6px"],"paddingRight":["12px"],"paddingLeft":["12px"],"borderStyle":"solid","borderWidth":"1px","borderColor":"#00000012","fontSize":["14px"]},"th":{"paddingTop":["6px"],"paddingBottom":["6px"],"paddingRight":["12px"],"paddingLeft":["12px"],"borderStyle":"solid","borderWidth":"1px","borderColor":"#00000012","fontSize":["16px"],"backgroundColor":"var(\u002d\u002dwp\u002d\u002dpreset\u002d\u002dcolor\u002d\u002dlightbg, #cddceb21)"}},"styleAttributes":{"width":["100%"]}} -->
+<table class="gsbp-7f2c7b7"><!-- wp:greenshift-blocks/element {"id":"gsbp-86384cd","tag":"tr","type":"inner","localId":"gsbp-86384cd"} -->
+<tr><!-- wp:greenshift-blocks/element {"id":"gsbp-d14108c","textContent":"Header","tag":"th","localId":"gsbp-d14108c"} -->
+<th>Header</th>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-537d215","textContent":"Header","tag":"th","localId":"gsbp-537d215"} -->
+<th>Header</th>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-243d78a","textContent":"Header","tag":"th","localId":"gsbp-243d78a"} -->
+<th>Header</th>
+<!-- /wp:greenshift-blocks/element --></tr>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-c811a76","tag":"tr","type":"inner","localId":"gsbp-c811a76"} -->
+<tr><!-- wp:greenshift-blocks/element {"id":"gsbp-39de8a7","tag":"td","localId":"gsbp-39de8a7"} -->
+<td></td>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-ecb7f59","tag":"td","localId":"gsbp-ecb7f59"} -->
+<td></td>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-cce32f2","tag":"td","localId":"gsbp-cce32f2"} -->
+<td></td>
+<!-- /wp:greenshift-blocks/element --></tr>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-2888a92","tag":"tr","type":"inner","localId":"gsbp-2888a92"} -->
+<tr><!-- wp:greenshift-blocks/element {"id":"gsbp-1d361d1","tag":"td","localId":"gsbp-1d361d1"} -->
+<td></td>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-afa96ae","tag":"td","localId":"gsbp-afa96ae"} -->
+<td></td>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-5eb9d0b","tag":"td","localId":"gsbp-5eb9d0b"} -->
+<td></td>
+<!-- /wp:greenshift-blocks/element --></tr>
+<!-- /wp:greenshift-blocks/element --></table>
+<!-- /wp:greenshift-blocks/element -->
+
+9. Marquee block
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-ee95a85","type":"inner","localId":"gsbp-ee95a85","marqueeSpeed":12,"isVariation":"marquee"} -->
+<div class="gsbp-ee95a85"><div class="gspb_marquee_content"><!-- wp:greenshift-blocks/element {"id":"gsbp-a7ca8ce","textContent":"Add Scroll Elements Here","tag":"span","localId":"gsbp-a7ca8ce","styleAttributes":{"fontSize":"30px"}} -->
+<span class="gsbp-a7ca8ce">Add Scroll Elements Here</span>
+<!-- /wp:greenshift-blocks/element --><span class="gspb_marquee_content_end"></span></div></div>
+<!-- /wp:greenshift-blocks/element -->
+
+10. Scrollable block (carousel) with control buttons
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-19ca25a","type":"inner","className":"gspb_smartscroll_btns gs-control-gsbp-f89fe12","localId":"gsbp-19ca25a","styleAttributes":{"display":["flex"],"gap":["15px"]},"metadata":{"name":"Buttons Container"}} -->
+<div class="gspb_smartscroll_btns gs-control-gsbp-f89fe12 gsbp-19ca25a"><!-- wp:greenshift-blocks/element {"id":"gsbp-13764e9","type":"inner","className":"previous","localId":"gsbp-13764e9","styleAttributes":{"width":["50px"],"height":["50px"],"cursor":["pointer"],"paddingLink_Extra":"all","paddingTop":["10px"],"paddingBottom":["10px"],"paddingLeft":["10px"],"paddingRight":["10px"],"borderBottomLeftRadius":["50%"],"borderBottomRightRadius":["50%"],"borderTopLeftRadius":["50%"],"borderTopRightRadius":["50%"],"borderRadiusLink_Extra":true,"display":["flex"],"flexDirection":["column"],"justifyContent":["center"],"alignItems":["center"],"borderWidth":["1px"],"borderStyle":["solid"],"borderColor":["#00000012"]},"metadata":{"name":"Previous Button"}} -->
+<div class="previous gsbp-13764e9"><!-- wp:greenshift-blocks/element {"id":"gsbp-93c071a","tag":"svg","icon":{"icon":{"font":"rhicon rhi-arrow-left","svg":"","image":""},"type":"font"},"localId":"gsbp-93c071a","styleAttributes":{"width":["100%"],"height":["100%"]}} -->
+<svg viewBox="0 0 896 1024" width="896" height="1024" class="gsbp-93c071a"><path d="M463.072 951.070l14.142-14.14c9.372-9.372 9.372-24.568 0-33.942l-356.988-356.988h751.774c13.254 0 24-10.746 24-24v-20c0-13.254-10.746-24-24-24h-751.774l356.988-356.988c9.372-9.372 9.372-24.568 0-33.942l-14.142-14.14c-9.372-9.372-24.568-9.372-33.94 0l-422.102 422.1c-9.372 9.372-9.372 24.568 0 33.942l422.102 422.1c9.372 9.372 24.568 9.372 33.94-0.002z" /></svg>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-da918ec","type":"inner","className":"next","localId":"gsbp-da918ec","styleAttributes":{"width":["50px"],"height":["50px"],"cursor":["pointer"],"paddingLink_Extra":"all","paddingTop":["10px"],"paddingBottom":["10px"],"paddingLeft":["10px"],"paddingRight":["10px"],"borderBottomLeftRadius":["50%"],"borderBottomRightRadius":["50%"],"borderTopLeftRadius":["50%"],"borderTopRightRadius":["50%"],"borderRadiusLink_Extra":true,"display":["flex"],"flexDirection":["column"],"justifyContent":["center"],"alignItems":["center"],"borderWidth":["1px"],"borderStyle":["solid"],"borderColor":["#00000012"]},"metadata":{"name":"Next Button"}} -->
+<div class="next gsbp-da918ec"><!-- wp:greenshift-blocks/element {"id":"gsbp-2a753c9","tag":"svg","icon":{"icon":{"font":"rhicon rhi-arrow-left","svg":"","image":""},"type":"font"},"localId":"gsbp-2a753c9","styleAttributes":{"width":["100%"],"height":["100%"],"transform":["rotate(180deg)"]}} -->
+<svg viewBox="0 0 896 1024" width="896" height="1024" class="gsbp-2a753c9"><path d="M463.072 951.070l14.142-14.14c9.372-9.372 9.372-24.568 0-33.942l-356.988-356.988h751.774c13.254 0 24-10.746 24-24v-20c0-13.254-10.746-24-24-24h-751.774l356.988-356.988c9.372-9.372 9.372-24.568 0-33.942l-14.142-14.14c-9.372-9.372-24.568-9.372-33.94 0l-422.102 422.1c-9.372 9.372-9.372 24.568 0 33.942l422.102 422.1c9.372 9.372 24.568 9.372 33.94-0.002z" /></svg>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-f89fe12","dynamicGClasses":[{"value":"gs_draggable_777","type":"local","label":"gs_draggable_777","localed":false,"css":".gs_draggable_777{overflow-x:scroll;overflow-y:hidden;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;column-gap:15px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:transparent transparent;-webkit-overflow-scrolling:touch}","attributes":{"styleAttributes":{"overflowLink_Extra":true,"overflowX":["scroll"],"overflowY":["hidden"],"display":["flex"],"flexDirection":["row"],"flexWrap":["nowrap"],"alignItems":["center"],"columnGap":["15px"],"scrollSnapType":["x mandatory"],"scrollbarWidth":["thin"],"scrollbarColor":["transparent transparent"],"WebkitOverflowScrolling":["touch"]}},"originalBlock":"greenshift-blocks/element","selectors":[{"value":"\u003e *","attributes":{"styleAttributes":{"flexGrow":["0"],"flexShrink":["0"],"flexBasis":["auto"]}},"css":".gs_draggable_777 \u003e *{flex-grow:0;flex-shrink:0;flex-basis:auto;}"},{"value":" *","attributes":{"styleAttributes":{"userSelect":["none"],"WebkitUserDrag":["none"]}},"css":".gs_draggable_777 *{user-select:none;-webkit-user-drag:none}"},{"value":" .wp-block-post-template","attributes":{"styleAttributes":{"overflowLink_Extra":true,"overflowX":["scroll"],"overflowY":["hidden"],"scrollSnapType":["x mandatory"],"scrollbarWidth":["thin"],"scrollbarColor":["transparent transparent"],"display":["flex"],"flexDirection":["row"],"flexWrap":["nowrap"],"columnGap":["15px"],"customCSS_Extra":"{CURRENT}{display: flex !important;}"}},"css":".gs_draggable_777 .wp-block-post-template{overflow-x:scroll;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:transparent transparent;display:flex;flex-direction:row;flex-wrap:nowrap;column-gap:15px;}.gs_draggable_00000 .wp-block-post-template{display: flex !important;}"},{"value":" .wp-block-post-template \u003e *","attributes":{},"css":""}]},{"value":"grab-cursor-front","type":"local","label":"grab-cursor-front","localed":false,"css":"body.gspb-bodyfront .grab-cursor-front{cursor:grab;}","attributes":{"styleAttributes":{"cursor":["grab"]}},"originalBlock":"greenshift-blocks/element","selectors":[{"value":" a","attributes":{"styleAttributes":{"cursor":["pointer"]}},"css":"body.gspb-bodyfront .grab-cursor-front a{cursor:pointer;}"}],"localedSpace":"front"}],"type":"inner","className":"gs_draggable_777 grab-cursor-front","localId":"gsbp-f89fe12","isVariation":"draggable","enableScrollButtons":true} -->
+<div class="gs_draggable_777 grab-cursor-front gsbp-f89fe12 gspb_smartscroll" data-dragenable="true"><!-- wp:greenshift-blocks/element {"id":"gsbp-cfcf55e","tag":"img","localId":"gsbp-cfcf55e"} -->
+<img loading="lazy"/>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-cd40110","tag":"img","localId":"gsbp-cd40110"} -->
+<img loading="lazy"/>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-f98934e","tag":"img","localId":"gsbp-f98934e"} -->
+<img loading="lazy"/>
+<!-- /wp:greenshift-blocks/element -->
+
+<!-- wp:greenshift-blocks/element {"id":"gsbp-5604b34","tag":"img","localId":"gsbp-5604b34"} -->
+<img loading="lazy"/>
+<!-- /wp:greenshift-blocks/element --></div>
+<!-- /wp:greenshift-blocks/element -->
+
+
+Extra instructions:
+
+1. for img tags, add loading="lazy" to images. Use url of image as https://placehold.co/600x400 to make image with 600px width and 400px height.
+2. for "a" tags, if it has target="_blank", add also noopener to rel.
+3. In svg tags, remove xmlns attribute.
+
+Return me only code, no comments, no explanations. Format must be the same as in example so I can put it in my gutenberg editor in Wordpress.
