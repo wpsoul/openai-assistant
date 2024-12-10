@@ -60,16 +60,16 @@ def submit():
     st.session_state.query = ''
 
 
-st.title("🍕 Papa Johns Pizza Assistant 🍕")
+st.title("GS Builder Assistant")
 
-st.text_input("Play with me:", key='query', on_change=submit)
+st.text_input("Ask me to build blocks for GreenShift:", key='query', on_change=submit)
 
 user_input = st.session_state.user_input
 
-st.write("You entered: ", user_input)
+st.write("Please, wait for the assistant to respond. You entered: ", user_input)
 
 if user_input:
-    result = get_assistant_response(user_input)
-    st.header('Assistant :blue[cool] :pizza:', divider='rainbow')
-    st.text(result)
+    result = get_assistant_response(user_input + " Please, build code for Greenshift according to instructions in retrieved database. Make sure that blocks with text also have textContent attribute.")
+    st.header('Assistant :green[GreenLight] ', divider='rainbow')
+    st.markdown(result)
 
